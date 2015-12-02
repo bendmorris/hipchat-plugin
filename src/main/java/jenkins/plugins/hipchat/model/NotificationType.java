@@ -42,6 +42,11 @@ public enum NotificationType {
                     return Messages.Failure();
                 }
             },
+    BROKEN {
+
+                @Override
+                public String getStatus() { return Messages.Broken(); }
+            },
     NOT_BUILT {
 
                 @Override
@@ -97,7 +102,7 @@ public enum NotificationType {
         if (result == Result.ABORTED) {
             return ABORTED;
         } else if (result == Result.FAILURE) {
-            return FAILURE;
+            return (previousResult == Result.SUCCESS) ? BROKEN : FAILURE;
         } else if (result == Result.NOT_BUILT) {
             return NOT_BUILT;
         } else if (result == Result.UNSTABLE) {

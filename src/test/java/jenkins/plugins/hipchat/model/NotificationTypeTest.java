@@ -30,6 +30,7 @@ public class NotificationTypeTest {
         assertNotificationMessage(NotificationType.STARTED, Messages.Started());
         assertNotificationMessage(NotificationType.SUCCESS, Messages.Success());
         assertNotificationMessage(NotificationType.UNSTABLE, Messages.Unstable());
+        assertNotificationMessage(NotificationType.BROKEN, Messages.Broken());
     }
 
     private void assertNotificationMessage(NotificationType type, String message) {

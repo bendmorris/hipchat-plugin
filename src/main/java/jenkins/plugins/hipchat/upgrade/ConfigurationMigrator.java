@@ -26,6 +26,7 @@ public class ConfigurationMigrator extends ItemListener {
                     notifier.setStartNotification(property.getStartNotification());
                     notifier.setNotifyAborted(property.getNotifyAborted());
                     notifier.setNotifyBackToNormal(property.getNotifyBackToNormal());
+                    notifier.setNotifyBroken(property.getNotifyBroken());
                     notifier.setNotifyFailure(property.getNotifyFailure());
                     notifier.setNotifyNotBuilt(property.getNotifyNotBuilt());
                     notifier.setNotifySuccess(property.getNotifySuccess());

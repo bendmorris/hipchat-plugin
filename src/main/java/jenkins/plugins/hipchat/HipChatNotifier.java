@@ -56,6 +56,7 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
     private transient boolean notifyUnstable;
     private transient boolean notifyFailure;
     private transient boolean notifyBackToNormal;
+    private transient boolean notifyBroken;
     private List<NotificationConfig> notifications;
     private MatrixTriggerMode matrixTriggerMode;
 
@@ -100,6 +101,10 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
 
     public void setNotifyBackToNormal(boolean notifyBackToNormal) {
         this.notifyBackToNormal = notifyBackToNormal;
+    }
+
+    public void setNotifyBroken(boolean notifyBroken) {
+        this.notifyBroken = notifyBroken;
     }
 
     public MatrixTriggerMode getMatrixTriggerMode() {
@@ -166,6 +171,9 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
             }
             if (notifyBackToNormal) {
                 notifications.add(new NotificationConfig(false, BACK_TO_NORMAL, Color.GREEN, null));
+            }
+            if (notifyBroken) {
+                notifications.add(new NotificationConfig(true, BROKEN, Color.RED, null));
             }
         }
         return this;
@@ -444,6 +452,7 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
         private final boolean notifyUnstable;
         private final boolean notifyFailure;
         private final boolean notifyBackToNormal;
+        private final boolean notifyBroken;
 
 
         @DataBoundConstructor
@@ -454,7 +463,8 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
                                   boolean notifyNotBuilt,
                                   boolean notifySuccess,
                                   boolean notifyUnstable,
-                                  boolean notifyBackToNormal) {
+                                  boolean notifyBackToNormal,
+                                  boolean notifyBroken) {
             this.room = room;
             this.startNotification = startNotification;
             this.notifyAborted = notifyAborted;
@@ -463,6 +473,7 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
             this.notifySuccess = notifySuccess;
             this.notifyUnstable = notifyUnstable;
             this.notifyBackToNormal = notifyBackToNormal;
+            this.notifyBroken = notifyBroken;
         }
 
         @Exported
@@ -505,6 +516,11 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
             return notifyBackToNormal;
         }
 
+        @Exported
+        public boolean getNotifyBroken() {
+            return notifyBroken;
+        }
+
         @Extension
         public static final class DescriptorImpl extends JobPropertyDescriptor {
             public String getDisplayName() {
@@ -525,7 +541,8 @@ public class HipChatNotifier extends Notifier implements MatrixAggregatable {
                         sr.getParameter("hipChatNotifyNotBuilt") != null,
                         sr.getParameter("hipChatNotifySuccess") != null,
                         sr.getParameter("hipChatNotifyUnstable") != null,
-                        sr.getParameter("hipChatNotifyBackToNormal") != null);
+                        sr.getParameter("hipChatNotifyBackToNormal") != null,
+                        sr.getParameter("hipChatNotifyBroken") != null);
             }
         }
     }

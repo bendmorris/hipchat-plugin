@@ -13,6 +13,7 @@ A Jenkins plugin that can send notifications to HipChat chat rooms for build eve
  * Success
  * Unstable
  * Back To Normal
+ * Broken
 * The room name can be parameterized
 * Supports different notification modes for matrix builds
 
